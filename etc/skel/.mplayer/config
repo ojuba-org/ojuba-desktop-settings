@@ -1,0 +1,7 @@
+# Write your default config options here!
+fontconfig = yes
+flip-hebrew = yes
+# set the encoding and font for your subscripts below
+fribidi-charset=cp1256
+subcp=cp1256
+font = "Sans"

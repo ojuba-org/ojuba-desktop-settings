@@ -1,0 +1,8 @@
+[ojuba Permissions]
+Identity=unix-user:*
+Action=org.freedesktop.udisks.filesystem-mount-system-internal
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
+
+
