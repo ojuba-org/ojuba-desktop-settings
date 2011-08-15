@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        5.0.1
+Version:        5.0.2
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
@@ -10,6 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 Provides:	ojuba-gnome-settings
 Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
+Requires(post): glib2
 # Requires(post):	google-release, skype-release
 # Requires(post): notification-daemon-engine-nodoka
 
@@ -23,7 +24,12 @@ Ojuba desktop default settings.
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/
-cp -a * $RPM_BUILD_ROOT/
+cp -a etc usr var $RPM_BUILD_ROOT/
+
+
+%post
+/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
@@ -35,6 +41,7 @@ cp -a * $RPM_BUILD_ROOT/
 %config(noreplace) /etc/skel/.mplayer/config
 %{_datadir}/glib-2.0/schemas/*.override
 /var/lib/polkit-1/localauthority/10-vendor.d/*
+
 
 %changelog
 * Fri Jul 29 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 5.0.0-3
