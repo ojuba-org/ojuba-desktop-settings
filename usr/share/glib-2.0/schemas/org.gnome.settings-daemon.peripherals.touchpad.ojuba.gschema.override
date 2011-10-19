@@ -1,0 +1,7 @@
+[org.gnome.settings-daemon.peripherals.touchpad]
+disable-while-typing=true
+scroll-method='edge-scrolling'
+tap-to-click=true
+# horiz-scroll-enabled=true
+
+
