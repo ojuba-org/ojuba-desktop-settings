@@ -29,7 +29,11 @@ cp -a etc usr var $RPM_BUILD_ROOT/
 
 %post
 /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans 11'
 
+%postun
+/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Cantarell Bold 11'
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
