@@ -10,7 +10,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 Provides:	ojuba-gnome-settings
 Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
-Requires(post): glib2
 # Requires(post):	google-release, skype-release
 # Requires(post): notification-daemon-engine-nodoka
 
@@ -27,13 +26,17 @@ mkdir -p $RPM_BUILD_ROOT/
 cp -a etc usr var $RPM_BUILD_ROOT/
 
 
-%post
-/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans 11'
 
-%postun
-/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Cantarell Bold 11'
+%posttrans gnome
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+
+%posttrans metacity
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans Bold 11' &> /dev/null || :
+
+%postun gnome
+if [ $1 -eq 0 ]; then
+  glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+fi
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
