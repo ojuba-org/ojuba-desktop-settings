@@ -10,6 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 Provides:	ojuba-gnome-settings
 Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
+Requires(posttrans): glib2 GConf2
 # Requires(post):	google-release, skype-release
 # Requires(post): notification-daemon-engine-nodoka
 
@@ -27,13 +28,11 @@ cp -a etc usr var $RPM_BUILD_ROOT/
 
 
 
-%posttrans gnome
+%posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
-
-%posttrans metacity
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans Bold 11' &> /dev/null || :
 
-%postun gnome
+%postun
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
