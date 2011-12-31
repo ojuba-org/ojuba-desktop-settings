@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        5.0.3
+Version:        16.0.0
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
@@ -51,6 +51,10 @@ fi
 
 
 %changelog
+* Sat Dec 31 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 16.0.0-1
+- add favorited apps
+- add default extensions
+
 * Fri Jul 29 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 5.0.0-3
 - update to use gsettings
 - obsolete ojuba-gnome-settings
