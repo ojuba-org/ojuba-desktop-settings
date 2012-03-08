@@ -25,17 +25,40 @@ Ojuba desktop default settings.
 %{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/
 cp -a etc usr var $RPM_BUILD_ROOT/
-
+chmod +x $RPM_BUILD_ROOT/usr/local/bin/*
 
 
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans Bold 11' &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/use_theme_colors --type bool false &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/foreground_color --type string '#FFFFFF' &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/background_color --type string '#000000' &> /dev/null || :
+            
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/background_type --type string 'transparent' &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/background_darkness --type float 0.8 &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/use_custom_default_size --type bool true &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/default_size_rows --type int 24 &> /dev/null || :
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+            -s /apps/gnome-terminal/profiles/Default/default_size_columns --type int 100 &> /dev/null || :
+# Fix xkeyboard-config right alt bug
+sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/null || :
+# enable SysRQ 
+sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || :
+echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
 
 %postun
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Cantarell Bold 11' &> /dev/null || :
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
@@ -47,7 +70,7 @@ fi
 %config(noreplace) /etc/skel/.mplayer/config
 %{_datadir}/glib-2.0/schemas/*.override
 /var/lib/polkit-1/localauthority/10-vendor.d/*
-
+/usr/local/bin/*
 
 %changelog
 * Sat Dec 31 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 16.0.0-1

@@ -1,0 +1,3 @@
+#! /bin/bash
+ARGS=$(echo $@ | sed 's/\s/|/g')
+gsettings list-recursively | sort | egrep --color=auto -i "($ARGS)"
