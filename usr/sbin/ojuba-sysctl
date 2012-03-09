@@ -1,5 +1,5 @@
-#  This file is part of ojuba-desktop-settings.
-#
+#!/bin/bash
+# Ojuba fix sysctl
 # Copyright © 2009, Ojuba Team <core@ojuba.org>
 
 # Released under terms of Waqf Public License.
@@ -14,14 +14,11 @@
 #    The Latest version of the license can be found on
 #    "http://waqf.ojuba.org/license"
 
-[Unit]
-Description=Ojuba boot parameters
-After=syslog.target
+/sbin/sysctl -e -p /etc/sysctl.conf &> /dev/null
 
-[Service]
-Type=oneshot
-RemainAfterExit=no
-ExecStart=/usr/sbin/ojuba-boot-params
+for i in {/usr/lib/sysctl.d/*.conf,/etc/sysctl.d/*.conf,/run/sysctl.d/*.conf}
+do
+  test -f $i && sysctl -e -p $i &> /dev/null
+done
 
-[Install]
-WantedBy=multi-user.target
+exit 0

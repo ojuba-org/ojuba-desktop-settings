@@ -15,13 +15,24 @@
 #    "http://waqf.ojuba.org/license"
 
 [Unit]
-Description=Ojuba boot parameters
-After=syslog.target
+Description=Ojuba Apply Kernel Variables
+DefaultDependencies=no
+Conflicts=shutdown.target
+After=systemd-readahead-collect.service systemd-readahead-replay.service systemd-sysctl.service
+Before=sysinit.target shutdown.target
+ConditionPathExists=|/etc/sysctl.conf
+ConditionDirectoryNotEmpty=|/lib/sysctl.d
+ConditionDirectoryNotEmpty=|/usr/lib/sysctl.d
+ConditionDirectoryNotEmpty=|/usr/local/lib/sysctl.d
+ConditionDirectoryNotEmpty=|/etc/sysctl.d
+ConditionDirectoryNotEmpty=|/run/sysctl.d
 
 [Service]
 Type=oneshot
-RemainAfterExit=no
-ExecStart=/usr/sbin/ojuba-boot-params
+RemainAfterExit=yes
+ExecStart=/usr/sbin/ojuba-sysctl
 
 [Install]
 WantedBy=multi-user.target
+
+
