@@ -82,8 +82,18 @@ fi
 %{_datadir}/glib-2.0/schemas/*.override
 /var/lib/polkit-1/localauthority/10-vendor.d/*
 %{_bindir}/*
+%{_sbindir}/*
+/lib/systemd/system/*
+
 
 %changelog
+* Fri Mar 09 2012 Ehab El-Gedawy <ehabsas@gmail.com> - 16.0.3
+- enable bluetooth
+- accept some boot params like
+  * xscreen=<WIDTH>x<HEIGHT>[x<DEPTH>] (eg. 800x600)
+  * xdriver
+  * lang
+
 * Sat Dec 31 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 16.0.0-1
 - add favorited apps
 - add default extensions
