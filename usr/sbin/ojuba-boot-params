@@ -1,0 +1,113 @@
+#!/bin/bash
+# apply boot parameters
+# Copyright © 2009, Ojuba Team <core@ojuba.org>
+
+# Released under terms of Waqf Public License.
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the latest version Waqf Public License as
+#    published by Ojuba.org.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#    The Latest version of the license can be found on
+#    "http://waqf.ojuba.org/license"
+
+set_lang()
+{
+  # allowing user to override gui lang
+  if [ -e "/etc/sysconfig/i18n" ]
+  then
+    # Using sed, if /etc/sysconfig/i18n exist
+    sed -rie "/^LANG/ s/=.*/=\"$1\"/" /etc/sysconfig/i18n
+  else
+    # Or directly write file
+    echo -e "LANG=\"$1\"" >/etc/sysconfig/i18n
+  fi
+}
+
+
+set_xdriver()
+{
+  # Backup current configuration, if exist
+  [ -f "$XDRIVER_FN" ] && /bin/mv -f $XDRIVER_FN $ALT_XDRIVER_FN
+  # Directly Write Configuration
+  # configure X, allowing user to override xdriver
+  SCREEN=''
+  if [ -n "$1" ]; then
+    cat >> $XDRIVER_FN <<FOE
+Section "Device"
+	Identifier	"Videocard0"
+	Driver	"$1"
+EndSection
+FOE
+    SCREEN='\tDevice\t"Videocard0"'
+  fi
+  #MODELINE=$(cvt ${2/x/\ } 2>/dev/null)
+  # configure X, allowing user to override screen resolution
+  if [ -n "$2" ]; then
+    cat >> /etc/X11/xorg.conf.d/00-xdriver.conf <<FOE
+Section "Monitor"
+	Identifier	"Monitor0"
+	$(cvt ${2/x/\ } 2>/dev/null)
+EndSection
+FOE
+    SCREEN="${SCREEN}\n\tMonitor\t\"Monitor0\""
+  fi
+
+  if [ -n "$SCREEN" ]; then
+    cat >> /etc/X11/xorg.conf.d/00-xdriver.conf <<FOE
+Section "Screen"
+	Identifier	"Screen0"
+	$(echo -e $SCREEN)
+EndSection
+FOE
+  fi
+}
+
+reset_xdriver()
+{
+  [ -f "$ALT_XDRIVER_FN" ] && /bin/mv -f $ALT_XDRIVER_FN $XDRIVER_FN || /bin/rm -f $XDRIVER_FN
+}
+
+
+# read some variables out of /proc/cmdline
+for o in `cat /proc/cmdline` ; do
+    case $o in
+    xdriver=*)
+        xdriver="${o#xdriver=}"
+        ;;
+    xscreen=*)
+        xscreen="${o#xscreen=}"
+        ;;
+    LANG=*)
+        LiveLocale="${o#LANG=}"
+        ;;
+    lang=*)
+        LiveLocale="${o#lang=}"
+        ;;
+    live_locale=*)
+        LiveLocale="${o#live_locale=}"
+        ;;
+    esac
+done
+
+if [ -n "$LiveLocale" ];
+then
+  set_lang "$LiveLocale"
+fi
+
+XDRIVER_FN=/etc/X11/xorg.conf.d/00-xdriver.conf
+ALT_XDRIVER_FN=/etc/X11/xorg.conf.d/00-xdriver.conf.bckup
+if [ -n "$xdriver" -o -n "$xscreen" ]
+then
+  if [ "$xdriver" == "reset" ]
+  then
+    reset_xdriver
+  else
+    set_xdriver "$xdriver" "$xscreen"
+  fi
+fi
+exit 0
+

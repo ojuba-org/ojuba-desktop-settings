@@ -1,0 +1,10 @@
+[Unit]
+Description=Ojuba boot parameters
+After=syslog.target
+
+[Service]
+ExecStart=/usr/sbin/ojuba-boot-params
+
+[Install]
+WantedBy=multi-user.target
+

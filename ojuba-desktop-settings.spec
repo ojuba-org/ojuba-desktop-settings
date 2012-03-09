@@ -10,7 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 Provides:	ojuba-gnome-settings
 Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
-Requires(posttrans): glib2 GConf2
+Requires(posttrans): glib2 GConf2 systemd-units
 # Requires(post):	google-release, skype-release
 # Requires(post): notification-daemon-engine-nodoka
 
@@ -54,11 +54,22 @@ sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/n
 sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || :
 echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
 
+if [ -x /bin/systemctl ];then
+  systemctl enable ojuba-boot-params.service &> /dev/null || :
+fi
+# Setup bluetooth service as multi-user.target service
+[ -e /etc/systemd/system/multi-user.target.wants/bluetooth.service ] || ln -s '/lib/systemd/system/bluetooth.service' '/etc/systemd/system/multi-user.target.wants/bluetooth.service'  &> /dev/null || :
+
 %postun
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Cantarell Bold 11' &> /dev/null || :
+
+if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
+  /bin/rm -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service  &> /dev/null || :
+fi
+
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
