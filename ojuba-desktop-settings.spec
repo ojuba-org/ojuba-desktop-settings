@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        16.0.2
+Version:        16.0.3
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
@@ -70,7 +70,7 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 %config(noreplace) /etc/skel/.mplayer/config
 %{_datadir}/glib-2.0/schemas/*.override
 /var/lib/polkit-1/localauthority/10-vendor.d/*
-/usr/local/bin/*
+%{_bindir}/*
 
 %changelog
 * Sat Dec 31 2011  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 16.0.0-1
