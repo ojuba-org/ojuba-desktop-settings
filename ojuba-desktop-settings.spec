@@ -76,7 +76,7 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
   /bin/rm -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service  &> /dev/null || :
 fi
-if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
+if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-sysctl.service ];then
   /etc/systemd/system/multi-user.target.wants/ojuba-sysctl.service  &> /dev/null || :
 fi
 
