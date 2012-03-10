@@ -54,15 +54,14 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 # FIXME: we must remove this line
 sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/null || :
 # enable SysRQ 
-# this line moved to systeminit script
-# sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || : 
+# fix initscripts bug
+sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || : 
 echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
 
 if [ -x /bin/systemctl ];then
   # FIXME: is this needed ?
   # systemctl daemon-reload &> /dev/null || :
   systemctl enable ojuba-boot-params.service &> /dev/null || :
-  systemctl enable ojuba-sysctl.service &> /dev/null || :
 fi
 # Setup bluetooth service as multi-user.target service
 [ -e /etc/systemd/system/multi-user.target.wants/bluetooth.service ] || ln -s '/lib/systemd/system/bluetooth.service' '/etc/systemd/system/multi-user.target.wants/bluetooth.service'  &> /dev/null || :
@@ -75,9 +74,6 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 
 if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
   /bin/rm -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service  &> /dev/null || :
-fi
-if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-sysctl.service ];then
-  /etc/systemd/system/multi-user.target.wants/ojuba-sysctl.service  &> /dev/null || :
 fi
 
 %files
