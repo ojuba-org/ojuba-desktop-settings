@@ -35,6 +35,6 @@ man()
   LESS_TERMCAP_us=$'\E[01;04;34m' \
   man "$@" 
 }
-alias pss='ps af | grep $1'
-alias psg='ps aux | grep $1'
+alias pss='ps af  | /bin/grep -v egrep | /bin/egrep --color=auto'
+alias psg='ps aux | /bin/grep -v egrep | /bin/egrep --color=auto'
 LC_TIME=en_US.utf8
