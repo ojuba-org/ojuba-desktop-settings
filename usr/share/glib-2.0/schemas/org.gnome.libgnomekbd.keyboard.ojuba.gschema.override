@@ -2,3 +2,8 @@
 layouts=['us', 'ara']
 model=''
 options=['altwin	altwin:super_win', 'grp_led	grp_led:scroll', 'grp	grp:alt_shift_toggle', 'terminate	terminate:ctrl_alt_bksp']
+
+[org.gnome.libgnomekbd.desktop]
+default-group=0
+group-per-window=true
+
