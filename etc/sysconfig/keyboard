@@ -1,0 +1,5 @@
+KEYBOARDTYPE="pc"
+KEYTABLE="ar-qwerty"
+LAYOUT="us,ara"
+OPTIONS="grp_led:scroll,grp:alt_shift_toggle,altwin:super_win"
+VARIANT=""
