@@ -5,5 +5,5 @@ options=['altwin	altwin:super_win', 'grp_led	grp_led:scroll', 'grp	grp:alt_shift
 
 [org.gnome.libgnomekbd.desktop]
 default-group=0
-group-per-window=true
+group-per-window=false
 
