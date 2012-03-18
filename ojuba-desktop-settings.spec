@@ -50,11 +50,11 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
             -s /apps/gnome-terminal/profiles/Default/default_size_columns --type int 100 &> /dev/null || :
 
-# Fix xkeyboard-config right alt bug
-# FIXME: we must remove this line
-sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/null || :
+# Fix xkeyboard-config right alt bug, this is only needed when if we don't have that package
+# sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/null || :
+
 # enable SysRQ 
-# fix initscripts bug
+# fix initscripts bug rhbz #760254
 sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || : 
 echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
 
