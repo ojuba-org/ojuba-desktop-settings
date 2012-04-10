@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        16.0.4
+Version:        16.0.5
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
