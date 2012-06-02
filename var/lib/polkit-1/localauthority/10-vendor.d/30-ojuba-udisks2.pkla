@@ -1,0 +1,15 @@
+[ojuba mount Permissions]
+Identity=unix-user:*
+Action=org.freedesktop.udisks2.filesystem-mount
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
+
+
+[ojuba mount-system Permissions]
+Identity=unix-user:*
+Action=org.freedesktop.udisks2.filesystem-mount-system
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
+

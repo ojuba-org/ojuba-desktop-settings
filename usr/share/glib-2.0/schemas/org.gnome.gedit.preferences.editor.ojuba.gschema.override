@@ -11,6 +11,6 @@ insert-spaces=true
 right-margin-position=80
 search-highlighting=true
 syntax-highlighting=true
-tabs-size=2
+tabs-size=4
 wrap-mode='word'
 
