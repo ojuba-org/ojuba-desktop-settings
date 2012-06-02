@@ -25,7 +25,7 @@ Ojuba desktop default settings.
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/
-cp -a etc lib usr var $RPM_BUILD_ROOT/
+cp -a etc usr var $RPM_BUILD_ROOT/
 chmod +x $RPM_BUILD_ROOT/%{_bindir}/*
 chmod +x $RPM_BUILD_ROOT/%{_sbindir}/*
 
