@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        16.0.5
+Version:        17.0.5
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
@@ -93,7 +93,11 @@ fi
 
 
 %changelog
-* Fri Mar 09 2012 Ehab El-Gedawy <ehabsas@gmail.com> - 16.0.3
+* Tue Jul 10 2012 Ehab El-Gedawy <ehabsas@gmail.com> - 17.0.5
+- add gedit WINDOWS-1256 encoding
+- add regular user automunt udisks2 
+  
+* Fri Mar 09 2012 Ehab El-Gedawy <ehabsas@gmail.com> - 17.0.5
 - enable bluetooth
 - accept some boot params like
   * xscreen=<WIDTH>x<HEIGHT>[x<DEPTH>] (eg. 800x600)
