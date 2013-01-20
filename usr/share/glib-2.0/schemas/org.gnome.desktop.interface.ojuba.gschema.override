@@ -16,3 +16,5 @@ icon-theme='Ojuba'
 #enable-animations=true
 #gtk-color-scheme=''
 
+[org.gnome.desktop.wm.preferences]
+titlebar-font='Sans Bold 11'

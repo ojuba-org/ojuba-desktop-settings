@@ -1,5 +1,5 @@
 Name:           ojuba-desktop-settings
-Version:        17.0.5
+Version:        18.0.5
 Release:        1%{dist}
 Summary:        Ojuba desktop default settings
 Group:          User Interface/Desktops
@@ -8,7 +8,7 @@ URL:            http://www.ojuba.org/
 Source0:        http://git.ojuba.org/cgit/%{name}/snapshot/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-Provides:	ojuba-gnome-settings
+Provides:	    ojuba-gnome-settings
 Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
 Requires(posttrans): glib2 GConf2 systemd-units
 BuildRequires: systemd-units
@@ -25,13 +25,14 @@ Ojuba desktop default settings.
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/
-cp -a etc usr var $RPM_BUILD_ROOT/
+cp -a etc usr $RPM_BUILD_ROOT/
 chmod +x $RPM_BUILD_ROOT/%{_bindir}/*
 chmod +x $RPM_BUILD_ROOT/%{_sbindir}/*
 
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Sans Bold 11' &> /dev/null || :
+
+# Gnome terminal settings
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
             -s /apps/gnome-terminal/profiles/Default/use_theme_colors --type bool false &> /dev/null || :
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
@@ -50,12 +51,8 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
             -s /apps/gnome-terminal/profiles/Default/default_size_columns --type int 100 &> /dev/null || :
 
-# Fix xkeyboard-config right alt bug, this is only needed when if we don't have that package
-# sed -rie  '/ralt_switch/ s;(.*$);//\1;' /usr/share/X11/xkb/symbols/ara &> /dev/null || :
 
 # enable SysRQ 
-# fix initscripts bug rhbz #760254
-sed -i '/kernel.sysrq/ s/=.*/= 1/' /etc/sysctl.conf &> /dev/null || : 
 echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
 
 if [ -x /bin/systemctl ];then
@@ -63,14 +60,11 @@ if [ -x /bin/systemctl ];then
   # systemctl daemon-reload &> /dev/null || :
   systemctl enable ojuba-boot-params.service &> /dev/null || :
 fi
-# Setup bluetooth service as multi-user.target service
-[ -e /etc/systemd/system/multi-user.target.wants/bluetooth.service ] || ln -s '/lib/systemd/system/bluetooth.service' '/etc/systemd/system/multi-user.target.wants/bluetooth.service'  &> /dev/null || :
 
 %postun
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s /apps/metacity/general/titlebar_font --type string 'Cantarell Bold 11' &> /dev/null || :
 
 if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
   /bin/rm -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service  &> /dev/null || :
@@ -78,7 +72,6 @@ fi
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
-%config(noreplace) /etc/X11/xinit/xinitrc.d/xim4arabic.sh
 %config(noreplace) /etc/modprobe.d/*
 %config(noreplace) /etc/profile.d/*
 %config(noreplace) /etc/fonts/conf.d/*
@@ -86,13 +79,16 @@ fi
 %config(noreplace) /etc/skel/.mplayer/config
 /etc/sysctl.d/*
 %{_datadir}/glib-2.0/schemas/*.override
-/var/lib/polkit-1/localauthority/10-vendor.d/*
+/etc/polkit-1/rules.d*
 %{_bindir}/*
 %{_sbindir}/*
 %{_unitdir}/*
 
 
 %changelog
+* Sun Jan 20 2013 Ehab El-Gedawy <ehabsas@gmail.com> - 18.0.5
+- Fedora 18 compatibility and fixs
+
 * Tue Jul 10 2012 Ehab El-Gedawy <ehabsas@gmail.com> - 17.0.5
 - add gedit WINDOWS-1256 encoding
 - add regular user automunt udisks2 
