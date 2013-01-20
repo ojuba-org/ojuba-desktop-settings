@@ -1,5 +1,5 @@
 [org.gnome.totem]
 autoload-subtitles=true
 subtitle-encoding='WINDOWS-1256'
-subtitle-font='Sans Bold 14'
+subtitle-font='Sans Bold 16'
 

@@ -1,9 +1,15 @@
-[org.gnome.libgnomekbd.keyboard]
-layouts=['us', 'ara']
-model=''
-options=['altwin	altwin:super_win', 'grp_led	grp_led:scroll', 'grp	grp:alt_shift_toggle', 'terminate	terminate:ctrl_alt_bksp']
+#[org.gnome.libgnomekbd.keyboard]
+#layouts=['us', 'ara']
+#model=''
+#options=['altwin	altwin:super_win', 'grp_led	grp_led:scroll', 'grp	#grp:alt_shift_toggle', 'terminate	terminate:ctrl_alt_bksp']
 
-[org.gnome.libgnomekbd.desktop]
-default-group=0
-group-per-window=false
+#[org.gnome.libgnomekbd.desktop]
+#default-group=0
+#group-per-window=false
 
+[org.gnome.desktop.input-sources]
+sources=[('xkb', 'us'), ('xkb', 'ara')]
+
+[org.gnome.settings-daemon.peripherals.keyboard]
+sources=[('xkb', 'us'), ('xkb', 'ara')]
+input-sources-switcher='alt-shift'
