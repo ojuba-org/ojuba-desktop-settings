@@ -80,10 +80,10 @@ fi
 %config(noreplace) /etc/fonts/conf.d/*
 %config(noreplace) /etc/fonts/conf.avail/*
 %config(noreplace) /etc/skel/.mplayer/config
-%config(noreplace) /etc/skel/.bashrc
+#%config(noreplace) /etc/skel/.bashrc
 /etc/sysctl.d/*
 %{_datadir}/glib-2.0/schemas/*.override
-/etc/polkit-1/rules.d*
+/etc/polkit-1/rules.d/*
 %{_bindir}/*
 %{_sbindir}/*
 %{_unitdir}/*
