@@ -1,29 +1,32 @@
-Name:           ojuba-desktop-settings
-Version:        18.0.5
-Release:        1%{dist}
-Summary:        Ojuba desktop default settings
-Group:          User Interface/Desktops
-License:        Waqf
-URL:            http://www.ojuba.org/
-Source0:        http://git.ojuba.org/cgit/%{name}/snapshot/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch:      noarch
-Provides:	    ojuba-gnome-settings
-Obsoletes:      ojuba-gnome-settings<%{version}-%{release}
-Requires(posttrans): glib2 GConf2 systemd-units
-BuildRequires: systemd-units
+%global owner ojuba-org
+%global commit #Write commit number here
+
+Name:			ojuba-desktop-settings
+Version:		35
+Release:		1%{dist}
+Summary:		Ojuba desktop default settings
+Group:			User Interface/Desktops
+License:		WAQFv2
+URL:			http://ojuba.org/
+Source:			https://github.com/%{owner}/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
+BuildArch:		noarch
+Provides:		ojuba-gnome-settings
+Obsoletes:		ojuba-gnome-settings<%{version}-%{release}
+Requires(posttrans):	glib2 GConf2 systemd-units
+BuildRequires:		systemd-units
 # Requires(post):	google-release, skype-release
-# Requires(post): notification-daemon-engine-nodoka
+# Requires(post):	notification-daemon-engine-nodoka
 
 %description
 Ojuba desktop default settings.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{commit}
 
 %build
+#NOTHING TO BUILD
+
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/
 cp -a etc usr $RPM_BUILD_ROOT/
 chmod +x $RPM_BUILD_ROOT/%{_bindir}/*
@@ -77,6 +80,7 @@ fi
 %config(noreplace) /etc/fonts/conf.d/*
 %config(noreplace) /etc/fonts/conf.avail/*
 %config(noreplace) /etc/skel/.mplayer/config
+%config(noreplace) /etc/skel/.bashrc
 /etc/sysctl.d/*
 %{_datadir}/glib-2.0/schemas/*.override
 /etc/polkit-1/rules.d*
@@ -86,6 +90,9 @@ fi
 
 
 %changelog
+* Sun Feb 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-1
+- General Revision.
+
 * Sun Jan 20 2013 Ehab El-Gedawy <ehabsas@gmail.com> - 18.0.5
 - Fedora 18 compatibility and fixs
 
@@ -173,4 +180,3 @@ fi
 
 * Thu Jun 12 2008 Muayyad Saleh Alsadi <alsadi@ojuba.org> - 1.0.0-1
 - Initial version
-
