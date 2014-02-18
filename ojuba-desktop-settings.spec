@@ -3,7 +3,7 @@
 
 Name:			ojuba-desktop-settings
 Version:		35
-Release:		1%{dist}
+Release:		2%{dist}
 Summary:		Ojuba desktop default settings
 Group:			User Interface/Desktops
 License:		WAQFv2
@@ -11,8 +11,10 @@ URL:			http://ojuba.org/
 Source:			https://github.com/%{owner}/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
 BuildArch:		noarch
 Provides:		ojuba-gnome-settings
-Obsoletes:		ojuba-gnome-settings<%{version}-%{release}
+Obsoletes:		ojuba-gnome-settings < %{version}-%{release}
 Requires(posttrans):	glib2 GConf2 systemd-units
+Requires(posttrans):	GConf2
+Requires(posttrans):	systemd-units
 BuildRequires:		systemd-units
 # Requires(post):	google-release, skype-release
 # Requires(post):	notification-daemon-engine-nodoka
@@ -80,7 +82,6 @@ fi
 %config(noreplace) /etc/fonts/conf.d/*
 %config(noreplace) /etc/fonts/conf.avail/*
 %config(noreplace) /etc/skel/.mplayer/config
-#%config(noreplace) /etc/skel/.bashrc
 /etc/sysctl.d/*
 %{_datadir}/glib-2.0/schemas/*.override
 /etc/polkit-1/rules.d/*
@@ -90,6 +91,9 @@ fi
 
 
 %changelog
+* Tue Feb 18 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-2
+- Fixes by Ehab El-Gedawy.
+
 * Sun Feb 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-1
 - General Revision.
 
