@@ -1,6 +1,6 @@
 [org.gnome.shell]
-favorite-apps=['mozilla-firefox.desktop', 'fedora-galculator.desktop','evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'libreoffice-writer.desktop', 'nautilus.desktop', 'occ.desktop', 'gnome-terminal.desktop']
-
-always-show-log-out=true
+favorite-apps=['mozilla-firefox.desktop', 'fedora-galculator.desktop','evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'openoffice.org-writer.desktop', 'nautilus.desktop', 'occ.desktop', 'ojuba-linux-docs.desktop', 'ojuba-release-notes.desktop', 'gnome-terminal.desktop']
 
 enabled-extensions=['alternative-status-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'xrandr-indicator@gnome-shell-extensions.gcampax.github.com', 'temperature@xtranophilist', 'RecentItems@bananenfisch.net', 'windowlist@o2net.cl', 'lockscreen@sri.ramkrishna.me', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'remove-accessibility-icon@martin-weusten.de', 'HijriApplet@ojuba.org']
+
+always-show-log-out=true

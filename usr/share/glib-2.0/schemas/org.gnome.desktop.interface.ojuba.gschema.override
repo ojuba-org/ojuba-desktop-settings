@@ -1,13 +1,13 @@
 [org.gnome.desktop.interface]
 clock-format='12h'
 #gtk-im-module='gtk-im-context-simple'
-#gtk-im-module='xim'
+gtk-im-module='xim'
 document-font-name='Sans 11'
 font-name='Sans 11'
 monospace-font-name='Monospace 11'
 
-buttons-have-icons=true
-menus-have-icons=true
+#buttons-have-icons=true
+#menus-have-icons=true
 
 icon-theme='Ojuba'
 #cursor-theme='Adwaita'

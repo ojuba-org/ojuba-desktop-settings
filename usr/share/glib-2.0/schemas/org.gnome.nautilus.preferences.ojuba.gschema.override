@@ -1,2 +1,4 @@
 [org.gnome.nautilus.preferences]
 sort-directories-first=true
+executable-text-activation='ask'
+default-sort-order='name'
