@@ -3,7 +3,7 @@
 
 Name:			ojuba-desktop-settings
 Version:		35
-Release:		2%{dist}
+Release:		3%{dist}
 Summary:		Ojuba desktop default settings
 Group:			User Interface/Desktops
 License:		WAQFv2
@@ -33,6 +33,7 @@ mkdir -p $RPM_BUILD_ROOT/
 cp -a etc usr $RPM_BUILD_ROOT/
 chmod +x $RPM_BUILD_ROOT/%{_bindir}/*
 chmod +x $RPM_BUILD_ROOT/%{_sbindir}/*
+chmod +x $RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d/*
 
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
@@ -83,14 +84,18 @@ fi
 %config(noreplace) /etc/fonts/conf.avail/*
 %config(noreplace) /etc/skel/.mplayer/config
 /etc/sysctl.d/*
-%{_datadir}/glib-2.0/schemas/*.override
+/etc/X11/xinit/xinitrc.d/*
 /etc/polkit-1/rules.d/*
+%{_datadir}/glib-2.0/schemas/*.override
 %{_bindir}/*
 %{_sbindir}/*
 %{_unitdir}/*
 
 
 %changelog
+* Sat Feb 22 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-3
+- Add xim4arab.
+
 * Tue Feb 18 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-2
 - Fixes by Ehab El-Gedawy.
 
