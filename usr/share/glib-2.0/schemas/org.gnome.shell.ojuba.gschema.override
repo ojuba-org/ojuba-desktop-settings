@@ -1,6 +1,9 @@
 [org.gnome.shell]
-favorite-apps=['mozilla-firefox.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'libreoffice-writer.desktop', 'nautilus.desktop', 'occ.desktop', 'gnome-terminal.desktop']
+favorite-apps=['mozilla-firefox.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'libreoffice-writer.desktop', 'nautilus.desktop', 'occ.desktop', 'gnome-terminal.desktop', 'anaconda.desktop']
 
 enabled-extensions=['alternative-status-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'xrandr-indicator@gnome-shell-extensions.gcampax.github.com', 'temperature@xtranophilist', 'RecentItems@bananenfisch.net', 'windowlist@o2net.cl', 'lockscreen@sri.ramkrishna.me', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'remove-accessibility-icon@martin-weusten.de', 'HijriApplet@ojuba.org']
 
 always-show-log-out=true
+
+[org.gnome.desktop.wm.preferences]
+button-layout=':minimize,maximize,close'
