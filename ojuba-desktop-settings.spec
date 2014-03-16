@@ -3,7 +3,7 @@
 
 Name:			ojuba-desktop-settings
 Version:		35
-Release:		4%{dist}
+Release:		7%{dist}
 Summary:		Ojuba desktop default settings
 Group:			User Interface/Desktops
 License:		WAQFv2
@@ -93,6 +93,9 @@ fi
 
 
 %changelog
+* Sun Mar 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-7
+- Fixes.
+
 * Sat Feb 22 2014 Mosaab Alzoubi <moceap@hotmail.com> - 35-4
 - Fixes.
 
