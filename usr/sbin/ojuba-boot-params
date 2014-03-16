@@ -17,14 +17,13 @@
 set_lang()
 {
   # allowing user to override gui lang
-  if [ -e "/etc/sysconfig/i18n" ]
-  then
-    # Using sed, if /etc/sysconfig/i18n exist
-    sed -rie "/^LANG/ s/=.*/=\"$1\"/" /etc/sysconfig/i18n
-  else
-    # Or directly write file
-    echo -e "LANG=\"$1\"" >/etc/sysconfig/i18n
-  fi
+  ACCOUNTS_SERVICE_DIR=/var/lib/AccountsService/users/
+  for f in $(ls ${ACCOUNTS_SERVICE_DIR})
+  do 
+
+      sed -rie "/^Language/ s/=.*/=\"$1\"/" ${ACCOUNTS_SERVICE_DIR}/${f}
+
+  done
 }
 
 
