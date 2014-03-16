@@ -5,5 +5,5 @@ enabled-extensions=['alternative-status-menu@gnome-shell-extensions.gcampax.gith
 
 always-show-log-out=true
 
-[org.gnome.desktop.wm.preferences]
+[org.gnome.shell.overrides]
 button-layout=':minimize,maximize,close'
