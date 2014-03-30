@@ -3,6 +3,8 @@ favorite-apps=['mozilla-firefox.desktop', 'empathy.desktop', 'rhythmbox.desktop'
 
 enabled-extensions=['alternative-status-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'xrandr-indicator@gnome-shell-extensions.gcampax.github.com', 'temperature@xtranophilist', 'RecentItems@bananenfisch.net', 'windowlist@o2net.cl', 'lockscreen@sri.ramkrishna.me', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'remove-accessibility-icon@martin-weusten.de', 'HijriApplet@ojuba.org']
 
+app-folder-categories=['Utilities', 'Games', 'Sundry', 'Office', 'Internet', 'Graphics', 'Multimedia', 'Qoran', 'Islamic-Software']
+
 always-show-log-out=true
 
 [org.gnome.shell.overrides]
