@@ -3,7 +3,7 @@
 
 Name:			ojuba-desktop-settings
 Version:		35
-Release:		8%{dist}
+Release:		9%{dist}
 Summary:		Ojuba desktop default settings
 Group:			User Interface/Desktops
 License:		WAQFv2
@@ -93,6 +93,9 @@ fi
 
 
 %changelog
+* Mon Apr 7 2014 Ehab El-Gedawy <ehabsas@gmail.com> - 35-9
+- fix set_lang in ojuba-boot-params
+
 * Mon Mar 31 2014 Ehab El-Gedawy <ehabsas@gmail.com> - 35-8
 - add app-folder-categories
 - fix set_lang in ojuba-boot-params
