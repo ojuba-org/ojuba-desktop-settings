@@ -1,0 +1,10 @@
+[org.mate.peripherals-keyboard-xkb.kbd]
+layouts=['us', 'ara']
+model=''
+options=['altwin:super_win', 'grp_led:scroll', 'grp:alt_shift_toggle', 'terminate:ctrl_alt_bksp']
+
+[org.mate.peripherals-keyboard-xkb.general]
+default-group=0
+group-per-window=true
+
+
