@@ -1,0 +1,3 @@
+[org.x.editor.preferences.encodings]
+auto-detected=['UTF-8', 'ISO-8859-15', 'UTF-16', 'WINDOWS-1256', 'WINDOWS-1252', 'WINDOWS-1250']
+shown-in-menu=['UTF-8', 'ISO-8859-15', 'UTF-16', 'WINDOWS-1256', 'WINDOWS-1252', 'WINDOWS-1250']

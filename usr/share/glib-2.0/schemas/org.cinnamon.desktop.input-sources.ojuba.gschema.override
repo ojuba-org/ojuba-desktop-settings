@@ -1,0 +1,6 @@
+[org.cinnamon.desktop.input-sources]
+current=0
+sources=[('xkb', 'us'), ('ibus', 'm17n:ar:kbd')]
+per-window=true
+xkb-options=['altwin:super_win', 'grp_led:scroll', 'grp:alt_shift_toggle', 'terminate:ctrl_alt_bksp']
+

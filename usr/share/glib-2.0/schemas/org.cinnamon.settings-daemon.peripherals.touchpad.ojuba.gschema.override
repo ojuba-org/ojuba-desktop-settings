@@ -1,0 +1,5 @@
+[org.cinnamon.settings-daemon.peripherals.touchpad]
+disable-while-typing=true
+horizontal-scrolling=true
+tap-to-click=true
+

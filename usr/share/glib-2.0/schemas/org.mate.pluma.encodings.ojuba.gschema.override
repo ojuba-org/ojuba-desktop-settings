@@ -1,3 +1,2 @@
 [org.mate.pluma]
-shown-in-menu-encodings=['WINDOWS-1256', 'WINDOWS-1252', 'UTF-8', 'UTF-16', 'ISO-8859-15']
 shown-in-menu-encodings=['CURRENT', 'WINDOWS-1256', 'WINDOWS-1252', 'UTF-8', 'UTF-16', 'ISO-8859-15']

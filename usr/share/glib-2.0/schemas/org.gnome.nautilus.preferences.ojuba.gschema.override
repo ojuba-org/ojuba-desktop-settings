@@ -1,4 +1,10 @@
 [org.gnome.nautilus.preferences]
-sort-directories-first=true
-executable-text-activation='ask'
+#sort-directories-first=true
+#executable-text-activation='ask'
 default-sort-order='name'
+
+[org.gtk.Settings.FileChooser]
+sort-directories-first=true
+
+[org.gtk.gtk4.Settings.FileChooser]
+sort-directories-first=true

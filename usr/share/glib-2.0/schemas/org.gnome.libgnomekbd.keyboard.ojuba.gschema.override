@@ -1,14 +1,17 @@
 [org.gnome.libgnomekbd.keyboard]
 layouts=['us', 'ara']
 model=''
-options=['altwin:super_win', 'grp_led:scroll', 'grp:alt_shift_toggle', 'terminate:ctrl_alt_bksp']
+#options=['altwin:super_win', 'grp\tgrp:alt_shift_toggle', 'grp\tgrp:lalt_lshift_toggle', 'grp_led\tgrp_led:scroll']
+options=['altwin:super_win', 'grp\tgrp:alt_shift_toggle', 'grp_led\tgrp_led:scroll']
 
 [org.gnome.libgnomekbd.desktop]
 default-group=0
 group-per-window=true
 
 [org.gnome.desktop.input-sources]
-sources=[('xkb', 'us'), ('xkb', 'ara')]
+current=0
+mru-sources=[('xkb', 'us'), ('ibus', 'm17n:ar:kbd')]
+sources=[('xkb', 'us'), ('ibus', 'm17n:ar:kbd')]
 per-window=true
 xkb-options=['altwin:super_win', 'grp_led:scroll', 'grp:alt_shift_toggle', 'terminate:ctrl_alt_bksp']
 

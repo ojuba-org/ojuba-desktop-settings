@@ -49,7 +49,10 @@ install-glib-schemas: einstall
 		$(ECHO) "    -- Installing $${i/./}..."; \
 		$(INSTALL) -m 0644 $${i} $(DATADIR)/share/glib-2.0/schemas/; \
 	done
-		
+	@if [ $(DESTDIR) == "/" ] ; then \
+	    @glib-compile-schemas $(DATADIR)/../usr/share/glib-2.0/schemas/ &> /dev/null || : ;\
+	fi
+	
 uninstall: euninstall uninstall-font-conf uninstall-polkit-rules uninstall-bash-profile uninstall-glib-schemas
 	
 	
@@ -87,4 +90,7 @@ uninstall-glib-schemas: euninstall
 		$(ECHO) "    -- Unnstalling $${i/./}..."; \
 		$(RM) -f $(DATADIR)/../$${i}; \
 	done
+	@if [ $(DESTDIR) == "/" ] ; then \
+	    @glib-compile-schemas $(DATADIR)/../usr/share/glib-2.0/schemas/ &> /dev/null || : ;\
+	fi
 	

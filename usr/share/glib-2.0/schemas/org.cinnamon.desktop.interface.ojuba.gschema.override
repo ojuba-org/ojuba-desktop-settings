@@ -1,0 +1,6 @@
+[org.cinnamon.desktop.interface]
+clock-use-24h=false
+gtk-im-module='xim:xim'
+buttons-have-icons=true
+menus-have-icons true
+

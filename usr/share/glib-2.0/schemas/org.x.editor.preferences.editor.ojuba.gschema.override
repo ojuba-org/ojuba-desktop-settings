@@ -1,0 +1,16 @@
+[org.x.editor.preferences.editor]
+auto-indent=true
+auto-save-interval=10
+auto-save=true
+bracket-matching=true
+create-backup-copy=false
+display-line-numbers=true
+display-right-margin=true
+highlight-current-line=true
+insert-spaces=true
+right-margin-position=80
+search-highlighting=true
+syntax-highlighting=true
+tabs-size=4
+wrap-mode='word'
+
