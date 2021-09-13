@@ -1,3 +1,39 @@
 Ojuba desktop settings
 Ojuba desktop default settings for fedora
 
+** Installing **
+
+- To install font config, PolicyKit rules, Bash profile and Glib override schemas.
+sudo make install | all 
+
+- To install font config.
+sudo make install-fonts-conf
+  
+- To install PolicyKit rules.
+sudo make install-polkit-rules
+  
+- To install Bash profile.
+sudo make install-bash-profile
+  
+- To install Glib override schemas.
+sudo make install-glib-schemas
+  
+  
+** Uninstalling **
+
+- To uninstall font config, PolicyKit rules, Bash profile and Glib override schemas.
+sudo make uninstall | all 
+
+- To uninstall font config.
+sudo make uninstall-fonts-conf
+  
+- To uninstall PolicyKit rules.
+sudo make uninstall-polkit-rules
+  
+- To uninstall Bash profile.
+sudo make uninstall-bash-profile
+  
+- To uninstall Glib override schemas.
+sudo make uninstall-glib-schemas
+  
+  
