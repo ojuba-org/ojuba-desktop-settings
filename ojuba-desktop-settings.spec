@@ -2,8 +2,8 @@
 %global commit #Write commit number here
 
 Name:			ojuba-desktop-settings
-Version:		35
-Release:		9%{dist}
+Version:		38
+Release:		10%{dist}
 Summary:		Ojuba desktop default settings
 Group:			User Interface/Desktops
 License:		WAQFv2
@@ -12,8 +12,8 @@ Source:			https://github.com/%{owner}/%{name}/archive/%{commit}/%{name}-%{commit
 BuildArch:		noarch
 Provides:		ojuba-gnome-settings
 Obsoletes:		ojuba-gnome-settings < %{version}-%{release}
-Requires(posttrans):	glib2 GConf2 systemd-units
-Requires(posttrans):	GConf2
+Requires(posttrans):	glib2 systemd-units
+#Requires(posttrans):	GConf2
 Requires(posttrans):	systemd-units
 BuildRequires:		systemd-units
 # Requires(post):	google-release, skype-release
@@ -39,24 +39,9 @@ chmod +x $RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d/*
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 # Gnome terminal settings
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/use_theme_colors --type bool false &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/foreground_color --type string '#FFFFFF' &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/background_color --type string '#000000' &> /dev/null || :
-            
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/background_type --type string 'transparent' &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/background_darkness --type float 0.8 &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/use_custom_default_size --type bool true &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/default_size_rows --type int 24 &> /dev/null || :
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s /apps/gnome-terminal/profiles/Default/default_size_columns --type int 100 &> /dev/null || :
-
+for i in "background-transparency-percent 20" "cursor-shape 'underline'" "default-size-columns 118" "default-size-rows 25" "title-mode 'ignore'" "use-transparent-background true"; do \
+  dconf write /org/gnome/terminal/legacy/profiles:/:$$(dconf read /org/gnome/terminal/legacy/profiles:/default|sed s/\'//g)/$${i} ;\
+done
 
 # enable SysRQ 
 echo 1 > /proc/sys/kernel/sysrq &> /dev/null || :
@@ -75,6 +60,7 @@ fi
 if [ -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service ];then
   /bin/rm -f /etc/systemd/system/multi-user.target.wants/ojuba-boot-params.service  &> /dev/null || :
 fi
+dconf reset -f /org/gnome/terminal/legacy/profiles:/:$$(dconf read /org/gnome/terminal/legacy/profiles:/default|sed s/\'//g)/
 
 %files
 %config(noreplace) /etc/X11/xorg.conf.d/00-touchpad.conf
@@ -93,6 +79,14 @@ fi
 
 
 %changelog
+* Tue Sep 14 2021 Ehab El-Gedawy <ehabsas@gmail.com> - 38-10
+- add mate pre-settings
+- remove obsoleted gconfig keys
+- Override Tahoma and Times New Roman with KacstOne
+- remove broken etc/fonts/conf.d/10-autohint.conf link
+- add cinnamon desktop settings
+- fix gnome terminal settings
+
 * Mon Apr 7 2014 Ehab El-Gedawy <ehabsas@gmail.com> - 35-9
 - fix set_lang in ojuba-boot-params
 
