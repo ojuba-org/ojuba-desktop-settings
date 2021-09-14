@@ -1,0 +1,8 @@
+[org.gnome.Terminal.Legacy.Profile]
+background-transparency-percent=20
+cursor-shape='underline'
+default-size-columns=118
+default-size-rows=25
+title-mode='ignore'
+use-transparent-background=true
+

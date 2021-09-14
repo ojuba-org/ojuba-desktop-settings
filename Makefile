@@ -13,6 +13,9 @@ install all:  einstall install-fonts-conf install-polkit-rules install-bash-prof
 	
 einstall:
 	@$(ECHO) "*** Installing $(APPNAME)..."
+	@for i in "background-transparency-percent 20" "cursor-shape 'underline'" "default-size-columns 118" "default-size-rows 25" "title-mode 'ignore'" "use-transparent-background true"; do \
+		dconf write /org/gnome/terminal/legacy/profiles:/:$$(dconf read /org/gnome/terminal/legacy/profiles:/default|sed s/\'//g)/$${i} ;\
+	done
 
 install-fonts-conf: einstall
 	@$(ECHO) "+ Installing font config..."
@@ -58,6 +61,7 @@ uninstall: euninstall uninstall-font-conf uninstall-polkit-rules uninstall-bash-
 	
 euninstall: 
 	@$(ECHO) "*** Uninstalling $(APPNAME)... "
+	@dconf reset -f /org/gnome/terminal/legacy/profiles:/:$$(dconf read /org/gnome/terminal/legacy/profiles:/default|sed s/\'//g)/
 	
 uninstall-font-conf: euninstall
 	@$(ECHO) "- Removing: font config."
